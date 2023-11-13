@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Searchbar from './components/Searchbar';
 import Form from './components/Form';
+// import {useTable} from 'react-table';
 
 export default function Transactions() {
   const [userTransactions, setTransactions] = useState([]);
   const [filteredTransactions, setFilteredTransactions] = useState([]);
 
-  const apiURL = "http://localhost:3000/transactions"
+  const apiURL = "https://my-json-server.typicode.com/josephmangara/H/transactions"
 
   useEffect(() => {
   fetch(apiURL)
@@ -33,7 +34,27 @@ export default function Transactions() {
    <>
    <h1 id="heading">User Transactions</h1>
    <Searchbar onSearch={handleSearch}/>
-   <ul id="table">
+   
+   <tbody id='mytable'>
+   <tr className='rows'>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Amount</th>
+    </tr>
+   {filteredTransactions.map(transaction => (
+      
+        <tr className='rows' key={transaction.id}>
+         <th>{transaction.date}</th>
+         <td>{transaction.description}</td>
+         <td>{transaction.category}</td>
+         <td>{transaction.amount}</td> 
+         {/* <hr /> */}
+        </tr>
+      
+    ))}
+   </tbody>
+   {/* <ul id="table">
     {filteredTransactions.map(transaction => (
       <li key={transaction.id}>
          <h4>Date: {transaction.date}</h4>
@@ -43,9 +64,11 @@ export default function Transactions() {
          <hr />
       </li>
     ))}
-   </ul>
+   </ul> */}
+   <hr />
    <Form onAddTransaction={handleAddTransactions} />
    <p id='track'>Track your spending with ease :)</p>
+   
    </>
   );
   }

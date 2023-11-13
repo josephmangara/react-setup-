@@ -34,3 +34,18 @@ code {
 .form {
   margin-left: 10px;
 }
+
+#mytable {
+  margin: 20px;
+  border-collapse: collapse;
+}
+.rows {
+  border: 1px solid black;
+  background-color: aquamarine;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 9px;
+  text-align: left;
+}
