@@ -20,14 +20,17 @@ code {
   margin-right: 10px;
 }
 #heading {
-  text-align: center;
+  /* font-style: italic; */
+  font-weight: bold;
+  margin-left: 30px;
 }
 .search-bar {
   margin-left: 10px;
   margin-right: 5px;
+  
 }
 #track {
-  text-align: center;
+  text-align: left;
   font-style: italic;
 }
 
