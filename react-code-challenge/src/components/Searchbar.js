@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 
+
 const Searchbar = ({onSearch}) => {
     const [query, setQuery] = useState ("")
     function search(event){
@@ -9,7 +10,7 @@ const Searchbar = ({onSearch}) => {
     }
 
   return (
-    <div>
+    <div id="search-bar">
         <input 
           className="search-bar"
           type="text" 

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Searchbar from './components/Searchbar';
 import Form from './components/Form';
-// import {useTable} from 'react-table';
+import Header from './components/Header';
+import Table from './components/Table';
 
 export default function Transactions() {
   const [userTransactions, setTransactions] = useState([]);
@@ -9,6 +10,7 @@ export default function Transactions() {
 
   const apiURL = "https://my-json-server.typicode.com/josephmangara/H/transactions"
 
+  //fetching data online
   useEffect(() => {
   fetch(apiURL)
   .then(response => response.json())
@@ -19,52 +21,35 @@ export default function Transactions() {
   })
 },[])
     
+//function for searching transactions by description
   const handleSearch = (query) => {
     const filtered = userTransactions.filter((transaction) =>
     transaction.description.toLowerCase().includes(query.toLowerCase())
   )
   setFilteredTransactions(filtered);
 }
+
+//function for adding transactions 
   const handleAddTransactions = (newTransaction) => {
     setTransactions([...userTransactions, newTransaction]);
     setFilteredTransactions([...userTransactions, newTransaction]);
   }
   
+//function for deleting transactions
+const deleteTransaction = (id) => {
+  const updatedTransactions = userTransactions.filter((transaction) => transaction.id !== id);
+  setTransactions(updatedTransactions);
+  setFilteredTransactions(updatedTransactions);
+}
+
+
+//rendering components
   return (
    <>
-   <h1 id="heading">User Transactions</h1>
+   <Header />
    <Searchbar onSearch={handleSearch}/>
+   <Table filteredTransactions={filteredTransactions} onDelete={deleteTransaction} />
    
-   <tbody id='mytable'>
-   <tr className='rows'>
-      <th>Date</th>
-      <th>Description</th>
-      <th>Category</th>
-      <th>Amount</th>
-    </tr>
-   {filteredTransactions.map(transaction => (
-      
-        <tr className='rows' key={transaction.id}>
-         <th>{transaction.date}</th>
-         <td>{transaction.description}</td>
-         <td>{transaction.category}</td>
-         <td>{transaction.amount}</td> 
-         {/* <hr /> */}
-        </tr>
-      
-    ))}
-   </tbody>
-   {/* <ul id="table">
-    {filteredTransactions.map(transaction => (
-      <li key={transaction.id}>
-         <h4>Date: {transaction.date}</h4>
-         <p>Description: {transaction.description}</p>
-         <p>Category: {transaction.category}</p>
-         <p>Amount: {transaction.amount}</p> 
-         <hr />
-      </li>
-    ))}
-   </ul> */}
    <hr />
    <Form onAddTransaction={handleAddTransactions} />
    <p id='track'>Track your spending with ease :)</p>

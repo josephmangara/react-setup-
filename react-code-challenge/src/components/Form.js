@@ -6,6 +6,7 @@ function Form(props) {
         description: "",
         category: "",
         amount: "",
+        
     });
 
     function handleChange(event){
@@ -25,49 +26,44 @@ function Form(props) {
         description: "",
         category: "",
         amount: "",
+        delete: "",
     });
   }
   return (
     <form className="form" onSubmit={handleSubmit}>
-        <div>
+       
         <input
           type="text"
           name="date"
           value={newTransaction.date}
           onChange={handleChange}
+          placeholder="Yr/mm/dd"
        />
-       <label>Date</label>
-       </div>
-       <div>
       
       <input 
          type="text"
          name="description"
          value={newTransaction.description}
          onChange={handleChange}
+         placeholder="description"
        />
-       <label>Description</label>
-      </div>
-      <div>
       
       <input
         type="text"
         name="category"
         value={newTransaction.category}
         onChange={handleChange}
+        placeholder="Category"
       />
-      <label>Category</label>
-      </div>
-      <div>
       
       <input
         type="text"
         name="amount"
         value={newTransaction.amount}
         onChange={handleChange}
+        placeholder="Amount"
       />
-      <label>Amount</label>
-      </div>
+
       <button type="submit">Add transaction</button>
     </form>
     );
